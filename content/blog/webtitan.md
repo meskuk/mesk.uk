@@ -1,6 +1,6 @@
 +++
 title = 'Bypassing WebTitan Cloud OTG 2.1.4'
-date = 2025-09-23T23:42:27+01:00
+date = 2026-02-01T14:45:00+00:00
 summary = 'Loose computer policies = no more web filter.'
 draft = true
 +++
