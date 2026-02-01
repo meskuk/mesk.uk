@@ -1,4 +1,10 @@
-Hi, I'm Meshak. I have great interest in the infrastructure side of IT, but like making/scripting things in general.
+Hi, I'm Meshak. I'm looking for the next step in my career. I have proficiency with:
+
+- Linux administration - especially RHEL-based systems as I use Fedora daily, and Debian
+- Scripting - Python, Bash, and some PowerShell
+- Networking - DNS, DHCP, VPNs (WireGuard), TCP/IP
+
+In my spare time, I like to look at these exact concepts too, or stumble on flaws with people's applications. Both are fun. 
 
 # Projects
 
