@@ -32,7 +32,7 @@ just in the browser.
 
 To start, let's look in the program directory[^1]:
 
-```
+```powershell
     Directory: C:\Program Files (x86)\WebTitan Cloud OTG\Unbound
 
 
@@ -135,3 +135,4 @@ application settings, an open port let me manipulate them!
 [^2]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
 
 [^3]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
+
