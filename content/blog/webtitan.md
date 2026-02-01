@@ -30,7 +30,7 @@ Turning on DNS over HTTPS in the browser circumvents it. Group Policy could have
 This is a little lengthier, and requires shell access of some kind, but it means bypassing the filter globally, and not
 just in the browser.
 
-To start, let's look in the program directory[^1]:
+To start, let's look in the program directory[^2]:
 
 ```text
     Directory: C:\Program Files (x86)\WebTitan Cloud OTG\Unbound
@@ -85,7 +85,7 @@ remote-control:
 
 But if you enable remote control over the network (or from localhost), you should be using certificates, enabling
 `control-use-cert`, and putting the client certificates in a protected directory. This way, only legitimate users
-can control Unbound.[^2]
+can control Unbound[^3].
 
 Since `control-use-cert` is set to `no`, you don't need to prove your identity to Unbound at all to control the daemon.
 How convenient!
@@ -132,8 +132,8 @@ For developers:
 application settings, an open port let me manipulate them!
 
 [^1]: Heh, _endpoint_. That feels fancy to say.
-[^2]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
+[^2]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
+[^3]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
 
-[^3]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
 
 
