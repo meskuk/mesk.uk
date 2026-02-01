@@ -1,6 +1,6 @@
-baseURL = 'https://alphanumeric3.github.io/'
+baseURL = 'https://mesk.uk/'
 languageCode = 'en-gb'
-title = "alphanumeric3's website"
+title = "Meshak Kukeba"
 theme = 'an3'
 
 [[menus.main]]
