@@ -131,9 +131,12 @@ For developers:
 - Consider what unprivileged users can do when the admin's safeguards aren't there, or have a hole. Even if I could not modify
 application settings, an open port let me manipulate them!
 
+Thank you for reading!
+
 [^1]: Heh, _endpoint_. That feels fancy to say.
 [^2]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
 [^3]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
+
 
 
 
