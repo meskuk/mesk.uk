@@ -5,6 +5,11 @@ summary = 'Loose computer policies = no more web filter.'
 draft = true
 +++
 
+Hi, this is edited from an old [Gist](https://gist.github.com/meskuk/f3ebb741e4d3591e79f004a4a62d73c5) of mine.
+
+When I had reported this to WebTitan at the time, it turned out to be already fixed. Still, I would like my achievement to be visible. Please enjoy.
+
+---
 
 Web filtering is very common in organisations. Maybe a library doesn't want you looking for Linux ISOs online,
 or your workplace definitely doesn't need you using Instagram on the job.
