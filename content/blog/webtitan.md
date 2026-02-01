@@ -114,6 +114,7 @@ And we are done. No more filtering. As a one-liner:
 ```powershell
 cd "C:\Program Files (x86)\WebTitan Cloud OTG\Unbound"; .\unbound-control.exe -c .\service.conf forward off
 ```
+
 # Key takeaways
 
 This was arguably quite simple and fun to find, but what can we learn from this?
