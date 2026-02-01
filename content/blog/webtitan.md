@@ -2,7 +2,7 @@
 title = 'Bypassing WebTitan Cloud OTG 2.1.4'
 date = 2026-02-01T14:45:00+00:00
 summary = 'Loose computer policies = no more web filter.'
-draft = true
+draft = false
 +++
 
 Hi, this is edited from an old [Gist](https://gist.github.com/meskuk/f3ebb741e4d3591e79f004a4a62d73c5) of mine.
@@ -133,4 +133,5 @@ application settings, an open port let me manipulate them!
 
 [^1]: Heh, _endpoint_. That feels fancy to say.
 [^2]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
+
 [^3]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
