@@ -7,17 +7,19 @@ draft = true
 
 Hi, this is edited from an old [Gist](https://gist.github.com/meskuk/f3ebb741e4d3591e79f004a4a62d73c5) of mine.
 
-When I had reported this to WebTitan at the time, it turned out to be *already fixed*. Still, I would like my achievement to be visible! Please enjoy.
+When I had reported this to WebTitan at the time, it turned out to be **already fixed**.
+
+Still, I would like my achievement to be visible! Please enjoy.
 
 ---
 
-Web filtering is very common in organisations. Maybe a library doesn't want you looking for Linux ISOs online,
+Web filtering is very common in organisations. Maybe a library doesn't want you looking for _Linux ISOs_ online,
 or your workplace definitely doesn't need you using Instagram on the job.
 
 There are two main ways to achieve web filtering that I've seen: transparently by the network's firewall, or on the endpoint with an agent,
 browser plugin or otherwise[^1].
 
-Today we'll be covering WebTitan Cloud OTG (On The Go), a roaming agent we'll be working with today.
+Today we'll be covering [WebTitan Cloud OTG](https://www.titanhq.com/dns-filtering/webtitancloud/) (On The Go), an agent.
 
 # Bypass 1
 
@@ -45,7 +47,7 @@ Mode                 LastWriteTime         Length Name
 -a----        09/12/2022     11:40        7978054 unbound.exe
 ```
 
-[unbound](). So it's very likely just using this
+[Unbound](https://www.nlnetlabs.nl/projects/unbound/about/) is a well-known, widely used caching DNS resolver. So it's very likely handling our DNS.
 
 ## The config
 Let's look at the configuration in `service.conf`, which we are thankfully able to access. Some important snippets:
@@ -81,8 +83,9 @@ remote-control:
 
 **This** part is really important. Unbound allows remote control by connecting to port 8953, which is enabled here.
 
-But if you enable remote control over the network (or from localhost), you should be using certificates and enabling
-`control-use-cert`. This way, only users with the client certificate can access it.[^2]
+But if you enable remote control over the network (or from localhost), you should be using certificates, enabling
+`control-use-cert`, and putting the client certificates in a protected directory. This way, only legitimate users
+can control Unbound.[^2]
 
 Since `control-use-cert` is set to `no`, you don't need to prove your identity to Unbound at all to control the daemon.
 How convenient!
@@ -116,15 +119,17 @@ cd "C:\Program Files (x86)\WebTitan Cloud OTG\Unbound"; .\unbound-control.exe -c
 This was arguably quite simple and fun to find, but what can we learn from this?
 
 Well, for admins:
+
 - Make sure the user can't browse application directories. The place where I found this made it impossible in File Explorer,
 but that brings me to my next point.
 - Make sure the user can't open a shell. I did all of this in Windows Terminal. Other methods include using File Explorer's URL bar,
 Cygwin, Python, and likely more!
 
 For developers:
+
 - Consider what unprivileged users can do when the admin's safeguards aren't there, or have a hole. Even if I could not modify
 application settings, an open port let me manipulate them!
 
-[^1]: Oho, what a word. I feel like a real sysadmin now.
+[^1]: Heh, _endpoint_. That feels fancy to say.
 [^2]: Cool fact, this configuration flaw is covered in [RHSA-2024-1750](https://access.redhat.com/errata/RHSA-2024:1750), as a bad default.
-[^3]: I realise it's more methodical to confirm with `netstat` and `nslookup` that yes, this is the DNS server, but the block pages and tray icon made it very apparent.
+[^3]: I realise it's more methodical to confirm with `netstat` and `nslookup`, but the block pages and tray icon made it very apparent.
