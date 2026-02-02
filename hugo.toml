@@ -19,11 +19,6 @@ weight = 20
 # pageRef = '/tags'
 # weight = 30
 
-[markup]
-  [markup.highlight]
-    style = 'tango'
-    guessSyntax = true
-
 [module]
   [module.hugoVersion]
     extended = false

@@ -1,3 +1,6 @@
+/* import syntax highlighting */
+@import "/css/syntax.css";
+
 /* default light theme.
 sorry if it looks convoluted, the variables are to reduce repetition of rules! */
 :root {
