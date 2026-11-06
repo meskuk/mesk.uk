@@ -26,6 +26,7 @@ sorry if it looks convoluted, the variables are to reduce repetition of rules! *
 	}
 }
 
+
 html {
 	background: var(--page-bg-img) var(--body-bg);
 }
@@ -38,7 +39,19 @@ body {
 	padding: 15px;
 	border: 2px solid var(--body-border);
 	border-radius: 5px;
-	margin: auto;
+	margin: 20px auto 20px auto;
+}
+
+@media screen and (min-width: 1000px) {
+	body { max-width: 60%; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+}
+
+nav a {
+  font-size: 1.2em
 }
 
 nav ul {
@@ -47,7 +60,6 @@ nav ul {
 
 nav ul li {
 	display: inline;
-	text-decoration: none;
 	margin-right: 2px;
 }
 
@@ -61,13 +73,13 @@ a:hover {
 }
 
 pre {
-	padding: 5px;
+	padding: 10px;
 	overflow: scroll;
 	border-radius: 5px;
 }
 
 main img {
-	max-width: 85%;
+	max-width: 80%;
 	margin-left: 7.5%; 
 	margin-right: 7.5%;
 	transition-duration: 0.15s;
@@ -76,5 +88,5 @@ main img {
 
 main img:hover {
 	border-radius: 0;
-	scale: 101%;
+	scale: 102%;
 }
