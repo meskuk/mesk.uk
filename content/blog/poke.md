@@ -5,7 +5,7 @@ summary = 'By modifying default automations, you can put Poke to work with a bro
 draft = false
 +++
 
-I'll skip the sign up.
+[Poke](https://poke.com) is a "a personal agent that lives in your texts"[^1]. At least on launch, it required you to set it up by texting from your phone, which immediately awoke the contrarian in me. See how I set it up without messaging it at all!
 
 ## Looking for pages
 
@@ -142,6 +142,8 @@ I kind of blundered by publishing this post, then unpublishing it a few minutes 
 It turns out that the reason this thing worked is that you used to be able to set up triggers before onboarding. Now it's simpler and throws you
 straight into adding your email/phone number.
 
-Also, they're giving me a gift card for Poke swag :)
+Also, they're giving me a gift card for Poke swag - my first ever reward for a bug! :)
 
 Thanks for reading!
+
+[^1]: https://cognition.com/blog/interaction
