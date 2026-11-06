@@ -1,10 +1,15 @@
-Hi, I'm Meshak. I'm looking for the next step in my career. I have proficiency with:
+Hi, I'm Meshak. I'm a Computing student. I have experience with:
 
-- Linux administration - especially RHEL-based systems as I use Fedora daily, and Debian
+- Linux administration - especially RHEL-based systems as I've spent time with Fedora, and Debian
 - Scripting - Python, Bash, and some PowerShell
 - Networking - DNS, DHCP, VPNs (WireGuard), TCP/IP
 
-In my spare time, I like to look at these exact concepts too, or stumble on flaws with people's applications. Both are fun. 
+Most of which I picked up in my spare time!
+
+Aside from this, I also love [circumventing] [things].
+
+[circumventing]: /blog/poke/
+[things]: /blog/webtitan/
 
 # Projects
 

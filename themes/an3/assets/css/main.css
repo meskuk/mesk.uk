@@ -69,5 +69,12 @@ pre {
 main img {
 	max-width: 85%;
 	margin-left: 7.5%; 
-	margin-right: 7.5%; 
+	margin-right: 7.5%;
+	transition-duration: 0.15s;
+	border-radius: 5px;
+}
+
+main img:hover {
+	border-radius: 0;
+	scale: 101%;
 }
