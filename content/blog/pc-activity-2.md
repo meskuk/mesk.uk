@@ -25,6 +25,8 @@ I made major changes to the Python side, like dropping `pyplot` in favor of [Jin
 
 Doing this made me finally find out normalisation exists. I use "[min-max normalisation]" on timestamps I collect, and map it to the Lightness of a HSL colour, which makes a lovely black to white to green scale.
 
+[min-max normalisation]: https://www.geeksforgeeks.org/data-analysis/normalization-and-scaling/#types-of-normalization-techniques
+
 Personally, it's nicer on the eye than my previous idea of using saturation:
 
 ![Comparison of colour scale by lightness vs colour scale of saturation](/img/pc-activity/lightness_vs_saturation.png)
@@ -37,7 +39,7 @@ On the PowerShell side, I did work to support collecting the data for classrooms
 
 One interesting part was deciding on how to do LDAP filters. I wanted the script to be easy to invoke, but not expose the naming convention here, which might be
 unwanted by IT.
-
+f
 So instead of using raw filters, the script takes room numbers (`-Rooms` argument) and makes a filter like this:
 
 ```powershell
@@ -52,7 +54,7 @@ The data format used by both scripts has now changed. At the start, it was somet
 
 ```json
 {
-    "COMPUTERNAME": <Unix timestamp>
+    "COMPUTERNAME": 1794869466 // Unix seconds
 }
 ```
 
@@ -64,12 +66,13 @@ Since I needed to split the computers into groups (classrooms), I went with this
 {
     "name": "Classroom name",
     "values": {
-        "COMPUTERNAME": <Unix timestamp>
+        "COMPUTERNAME": 1794869466
     }
 }
 ```
 
 Excellent! If I don't like dealing with several files, I can even merge these into an array, which I [also tried].
+
 [also tried]: https://github.com/meskuk/pcmap/blob/d97977174972f88257f7db8f53d0fc379d09374f/data/test.json
 
 But without context on _when_ the data was taken, the colours will change _every time_ the site is generated. Not good.
@@ -78,12 +81,12 @@ I did much agonising before ending up with this:
 
 ```json
 {
-    "collected_at": <Unix timestamp>,
+    "collected_at": 1794869466,
     "rooms": [
         {
             "name": "Classroom name",
             "times": {
-                "COMPUTERNAME": <Unix timestamp>
+                "COMPUTERNAME": 1794869466
             }
         }
     ]
