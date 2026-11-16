@@ -15,6 +15,7 @@ Aside from this, I also love [circumventing] [things].
 
 My best projects are:
 
+- [Activity Chart](/chart/) - Activity chart of two classrooms' PCs at UCLan London <-- **Please take a look!**
 - [nopaper](https://github.com/meskuk/nopaper) - A Python script to monitor the status of HP LaserJet MFPs.
 - [Ansible playbooks](https://github.com/meskuk/playbooks) - Ansible playbooks for personal use.
 - [PowerShell Scripts](https://github.com/meskuk/scripts) - Simple scripts I made to help me explore Active Directory environments.
