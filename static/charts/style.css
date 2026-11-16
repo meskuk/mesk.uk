@@ -1,0 +1,57 @@
+body {
+    margin-left: 10px;
+    max-width: 100vw;
+    font-family: sans-serif;
+}
+
+nav ol { padding-left: 0; }
+nav ol li { display: inline; }
+
+.chart-ctr {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.chart {
+    display: grid;
+    /* TODO: make it so that the gap can be the same for row and column.
+    .cell divs aren't exactly 100px due to border and padding, so that
+    needs to be accounted for. */
+    grid-template-columns: repeat(6, 100px);
+    column-gap: 10px;
+    row-gap: 3px;
+}
+.cell {
+    max-width: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 2px;
+    transition-duration: 0.2s;
+    border: 2px solid transparent;
+}
+.cell:hover {
+    scale: 105%;
+    border-color: black;
+}
+.low { color: #ddd; }
+
+.key {
+    border: 2px solid black;
+    max-width: min-content;
+    display: flex;
+}
+.key > * {
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    align-content: center;
+}
+.key-0 {
+    background: hsl(100 100% 0%);
+    color: white;
+}
+.key-25 { background: hsl(100 100% 25%); }
+.key-50 { background: hsl(100 100% 50%); }
+.key-75 { background: hsl(100 100% 75%); }
+.key-100 { background: hsl(100 100% 100%); }
