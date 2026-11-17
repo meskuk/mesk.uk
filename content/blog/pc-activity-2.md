@@ -37,14 +37,15 @@ It also generates pages that are linked between eachother, for easy navigation.
 
 On the PowerShell side, I did work to support collecting the data for classrooms at once.
 
-One interesting part was deciding on how to do LDAP filters. I wanted the script to be easy to invoke, but not expose the naming convention here, which might be
-unwanted by IT.
-f
+One interesting part was deciding on how to do LDAP filters. I wanted the script to be easy to invoke, but not expose the naming convention here, which might be unwanted by IT[^1].
+
 So instead of using raw filters, the script takes room numbers (`-Rooms` argument) and makes a filter like this:
 
 ```powershell
 $searcher.Filter = "(&(objectClass=computer)(name=*-LAB-$room))"
 ```
+
+This only exposes the end of the name.
 
 It's very restrictive compared to before, but I'll expand it when I need to.
 
@@ -99,11 +100,13 @@ The only reason things ended up this way is that I didn't take the time to think
 
 - **Automation:** The overall goal is to have enough data to actually see change over time. Sadly, a daily overview requires criminal amounts of shadow IT.
 
-- **Not using a static site:** I might stand up a service in the cloud. The biggest bottleneck right now is publishing the data as it requires access to my GitHub account. If I build a service, I can just upload times 
-to a server from any university PC.
+- **Not using a static site:** I might stand up a service in the cloud. The biggest bottleneck right now is publishing the data as it requires access to my GitHub account. If I build a service, I can just upload times to a server from any university PC[^2].
 
 - **Other data:** I also want to look into other stats. For example, how many students logged in today? What's the market share of Gmail in the student body, according to Active Directory? And other very ethical ideas.
 
 - **More cleanup:** My code is admittedly not at its best. It needs some more love.
 
 Hopefully this takes me to a good place! Thanks for reading! :)
+
+[^1]: Realistically: if I get questioned about doing this, hiding hostnames won't save me.
+And if they're of any use to an attacker, there are **far** bigger problems at play. But I find it unnecessary regardless.
